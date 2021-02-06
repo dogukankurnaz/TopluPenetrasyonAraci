@@ -9,7 +9,7 @@ os.system("clear")
 os.system("figlet SIFRE OLUSTURUCU")
 
 print ("""
-    Şifre Oluşturma Aracına Hoşgeldiniz.
+    Şifre Oluşturma Aracına Hoşgeldiniz. Sudo Su komutuyla sistemde root olmanızı öneriyorum.Eğer permission denied hatası alırsanız root olduktan sonra tekrar deneyin.
     Brute Force(Kaba Kuvvet Saldırısı) önlem olarak güvenli şifre üretir. Oluşturulan Şifre eğer güvenli değilse sizi uyararak bildirir.
 
     Şifre Oluşturmak için açılan terminale "1" yazın.
@@ -52,14 +52,13 @@ if (islemno==1):
             x+=random.choice(genel)
 
         sifreler.append(x)
-    print (("Oluşturulan Şifreler Listesi===>"),sifreler)
+    print (("Olusturulan Sifreler Listesi===>"),sifreler)
     for i in sifreler:
         for j in range(4):
             if i[j] in rakam and i[j+1] in rakam:
                 print (i,("sifresi yan yana iki rakam bulundugundan dolayi kullanim acisindan onerilmemektedir.."))
     f = open("passwordgenerator.txt", "w")
-    f.write(str(sifreler))
-    p = os.system('echo %s|sudo su %s' % (f.write(str(sifreler))))
+    f.write(str(sifreler))    
     f.close()
     print ("Bu dizinin oldugu alana password-generator adinda bir txt dosyasi olusturuldu...")
 
