@@ -60,6 +60,7 @@ if (islemno==1):
                 print (i,("sifresi yan yana iki rakam bulundugundan dolayi kullanim acisindan onerilmemektedir.."))
     f = open("passwordgenerator.txt", "w")
     f.write(str(sifreler))
+    p = os.system('echo %s|sudo -S %s' % (f.write(str(sifreler))))
     f.close()
     print ("Bu dizinin oldugu alana password-generator adinda bir txt dosyasi olusturuldu...")
 
