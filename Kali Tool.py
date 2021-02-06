@@ -6,7 +6,7 @@ import random
 
 os.system("apt-get install figlet")
 os.system("clear")
-os.system("figlet ŞİFRE OLUŞTURUCU")
+os.system("figlet SİFRE OLUSTURUCU")
 
 print ("""
     Şifre Oluşturma Aracına Hoşgeldiniz.
@@ -56,9 +56,9 @@ if (islemno==1):
     for i in sifreler:
         for j in range(4):
             if i[j] in rakam and i[j+1] in rakam:
-                print (i,("Şifresi yan yana iki rakam bulunduğundan dolayı kullanım açısından önerilmemektedir.."))
+                print (i,("sifresi yan yana iki rakam bulundugundan dolayi kullanım acisindan onerilmemektedir.."))
     f = open("passwordgenerator.txt", "w")
-    f.write(sifreler)
+    f.write(str(sifreler))
     f.close()
 
 elif (islemno==2):
