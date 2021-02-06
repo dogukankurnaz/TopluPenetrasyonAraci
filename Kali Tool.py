@@ -6,7 +6,7 @@ import random
 
 os.system("apt-get install figlet")
 os.system("clear")
-os.system("figlet SİFRE OLUSTURUCU")
+os.system("figlet SIFRE OLUSTURUCU")
 
 print ("""
     Şifre Oluşturma Aracına Hoşgeldiniz.
@@ -23,7 +23,7 @@ islemno=int(input("İşlem Numarasını Girin:"))
 
 if (islemno==1):
 
-
+# -*- coding: utf-8 -*-
     sifreler=[]
     bharf=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "Y", "Z", "X"]
     kharf=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "v", "w", "y", "z", "x"]
@@ -56,10 +56,11 @@ if (islemno==1):
     for i in sifreler:
         for j in range(4):
             if i[j] in rakam and i[j+1] in rakam:
-                print (i,("sifresi yan yana iki rakam bulundugundan dolayi kullanım acisindan onerilmemektedir.."))
+                print (i,("sifresi yan yana iki rakam bulundugundan dolayi kullanim acisindan onerilmemektedir.."))
     f = open("passwordgenerator.txt", "w")
     f.write(str(sifreler))
     f.close()
+    print ("Bu dizinin oldugu alana password-generator adinda bir txt dosyasi olusturuldu...")
 
 elif (islemno==2):
     print("Program kapatılıyor.")
