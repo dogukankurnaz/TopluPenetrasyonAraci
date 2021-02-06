@@ -4,10 +4,10 @@
 import os
 import random
 
+os.system("sudo su")
 os.system("apt-get install figlet")
 os.system("clear")
 os.system("figlet SIFRE OLUSTURUCU")
-os.system("sudo su")
 
 print ("""
     Şifre Oluşturma Aracına Hoşgeldiniz.
