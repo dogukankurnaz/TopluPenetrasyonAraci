@@ -3,24 +3,47 @@
 
 import os
 import random
-
+import sys
+# ----------------------------------------------------------------------------------------------------
+python = sys.executable #script restart
+# ----------------------------------------------------------------------------------------------------
+euid = os.geteuid()
+if euid != 0:
+    print ("""Script not started as root. Running sudo..
+Script başlatilamiyor.Sistemde ROOT Kullanici olun..
+    """)
+    args = ['sudo', sys.executable] + sys.argv + [os.environ]
+    # the next line replaces the currently-running process with the sudo
+    os.execlpe('sudo', *args)
+# ----------------------------------------------------------------------------------------------------
 os.system("apt-get install figlet")
-os.system("apt-get update")
 os.system("clear")
 os.system("figlet Toplu Penetrasyon Araci")
 
 print("""Toplu Penetrasyon Aracina Hosgeldiniz.
 icindekiler:
 1)BruteForce Karsi Sifre Olusturma
-2)Port Tarama""")
+2)Port Tarama
+3)VPN Sunucusu Kontrol
+4)Sunucu Zafiyet Analizi
+5)Güvenlik Duvarı Tespiti
+6)Exploit Arama
+7)Port Servisleri Brute Force
+8)Wordpress Site Zaafiyet Analizi
+9)Worlist Olusturma
+""")
 secim=int(input("Lütfen Secim Yapiniz:"))
-if (secim==1):
-        print ("""
-        Şifre Oluşturma Aracına Hoşgeldiniz. Sudo Su komutuyla sistemde root olmanızı öneriyorum.Eğer permission denied hatası alırsanız root olduktan sonra tekrar deneyin.
-        Brute Force(Kaba Kuvvet Saldırısı) önlem olarak güvenli şifre üretir. Oluşturulan Şifre eğer güvenli değilse sizi uyararak bildirir.
 
-        1)Şifre Oluşturmak için açılan terminale "1" yazın.
-        2)Çıkmak için "2" yazın.
+# ----------------------------------------------------------------------------------------------------
+if (secim==1): #pass generator
+        os.system("clear")
+        os.system("figlet Sifre Olusturucu")
+        print ("""
+Şifre Oluşturma Aracına Hoşgeldiniz. Sudo Su komutuyla sistemde root olmanızı öneriyorum.Eğer permission denied hatası alırsanız root olduktan sonra tekrar deneyin.
+Brute Force(Kaba Kuvvet Saldırısı) önlem olarak güvenli şifre üretir. Oluşturulan Şifre eğer güvenli değilse sizi uyararak bildirir.
+
+1)Şifre Oluşturmak için açılan terminale "1" yazın.
+2)Ana Menü için "0" yazın.
 
 
 
@@ -71,31 +94,154 @@ if (secim==1):
 
             print ("Bu dizinin oldugu alana password-generator adinda bir txt dosyasi olusturuldu...")
 
-        elif (islemno==2):
-            print("Program kapatılıyor.")
+        elif (islemno==0):
+            os.execl(python, python, * sys.argv)
         else:
             print("Yanlis bir ifade girdiniz program kapatildi!")
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 elif (secim==2):
     os.system("clear")
-    os.system("apt-get install nmap")
+    os.system("apt-get install nmap -y")
     os.system("clear")
     os.system("figlet Port Tarama")
     print(""" Port Tarama Uygulamasina Hosgeldiniz. 
-    
-    1) Hizli Tarama
-    2) Servis ve Versiyon Bilgisi
-    3) Isletim Sistemi Bilgisi
-    
-    """)
-    hedefip=int(input("Hedef IP Girin: "))
+        
+        1) Hizli Tarama
+        2) Servis ve Versiyon Bilgisi
+        3) Isletim Sistemi Bilgisi
+        0) Ana Menuye dönmek icin
+        
+        """)
+    hedefip=raw_input("Hedef IP Girin: ")    
     portislem=int(input("Islem numarasi giriniz: "))
     if (portislem==1):        
-        os.system("nmap "+hedefip)
+            os.system("nmap "+hedefip)
     elif (portislem==2):
-        os.system("nmap -sS -sV "+hedefip)
+            os.system("nmap -sS -sV "+hedefip)
     elif (portislem==3):
-        os.system("nmap -O"+hedefip)
+            os.system("nmap -O"+hedefip)
+    elif (portislem==0):
+            os.execl(python, python, * sys.argv)
     else:
-        print("Hatali bir secim yaptiniz program kapatiliyor.")
-
-
+            print("Hatali bir secim yaptiniz program kapatiliyor.")
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+elif (secim==3):
+    os.system("apt-get install ike-scan -y")
+    os.system("clear")
+    os.system("figlet VPN Kontrol")
+    print ("""Hosgeldiniz.. VPN Kontrolu icin ip adresi girin..
+1)VPN sunucusunu kontrol etmek
+2)Ana menuye donmek icin""")
+    vpnislem=int(input("Islem numarasini secin: "))
+    hedefip=raw_input("Hedef IP Girin: ")
+    if (vpnislem==1):
+        os.system("ike-scan "+ hedefip)
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==4):
+    os.system("apt-get install nikto -y")
+    os.system("clear")
+    os.system("figlet Zaafiyet Analizi")
+    print ("""
+Hosgeldiniz.. Zaafiyet analizi icin ip adresi girin..
+1)Zaafiyet analizini baslatmak icin
+not: Sistemde bir zaafiyet bulursa Exploitleriyle birlikte size bir cikti verir..
+2)Ana menuye donmek icin""")
+    niktosec=int(input("Seciminizi yapin: "))
+    hedefip=raw_input("Hedef IP Girin: ")
+    if (niktosec==1):
+        os.system("nikto -h"+ hedefip)
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==5):
+    os.system("apt-get install wafw00f")
+    os.system("clear")
+    os.system("figlet Guvenlik Duvari Tespiti")
+    print ("""
+Hosgeldiniz.. Güvenlik Duvari Tespiti icin site adresi girin..
+1)Guvenlik Duvari Tespiti icin
+2)Ana menuye donmek icin""")
+    wafsecim=str(raw_input("Site Adresi Girin:"))
+    if (wafsecim==1):
+        os.system("wafw00f "+wafsecim)
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==6):    
+    os.system("clear")
+    os.system("figlet Exploit Arama")
+    print ("""
+Hosgeldiniz.. Veritabanında Exploit arama işlemi icin seciminizi girin..
+1)Exploit aramak icin
+2)Ana menuye donmek icin""")
+    exploitsecim=str(raw_input("Anahtar Kelime Girin:"))
+    if (exploitsecim==1):
+        os.system("searchsploit"+ exploitsecim)
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==7):
+    os.system("apt-get install ncrack -y")    
+    os.system("clear")
+    os.system("figlet Port Kaba Kuvvet")
+    print ("""
+Hosgeldiniz.. Portlara yönelik kaba kuvvet işlemi icin seciminizi girin..
+1) FTP
+2) SSH
+not:(telnet,http,smb gibi diğer portlar yakında gelecek..)
+3)Ana menuye donmek icin""")
+    portislemno=raw_input("Islem Numarasi Girin:")
+    porthedefip=raw_input("Hedef IP adresini girin:")
+    kullaniciadi=raw_input("Kullanici Adi Wordlist Yolu:")
+    sifre=raw_input("Sifrelerin bulundugu dosya yolu:")
+    if (portislemno==1):
+        os.system("ncrack -p 21 -U"+ kullaniciadi + " -P " + sifre + " " + porthedefip)
+    elif (portislemno==2):
+        os.system("ncrack -p 22 -U"+ kullaniciadi + " -P " + sifre + " " + porthedefip)
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==8): 
+    os.system("apt-get install wpscan -y")
+    os.system("clear")
+    os.system("figlet Wordpress Tarama")
+    print ("""
+Hosgeldiniz.. Wordpress Zaafiyet Tespit islemleri icin seciminizi girin..
+1)Hizli Tarama
+2)Eklenti Tarama
+3)Tema Tarama
+4)Yonetim Kullanici adi tarama
+5)Ana menuye donmek icin
+Not:Update Sorarsa Y yazip bekleyin..""")
+    wpsecim=str(raw_input("Seciminizi Girin: "))
+    siteadresi=raw_input("Site Adresi Girin: ")
+    if (wpsecim==1):
+        os.system("wpscan --url "+ siteadresi)
+    elif (wpsecim==2):
+        os.system("wpscan --url "+ siteadresi + " --enumerate p")
+    elif (wpsecim==3):
+        os.system("wpscan --url "+ siteadresi + " --enumerate t")
+    elif (wpsecim==4):
+        os.system("wpscan --url "+ siteadresi + " --enumerate u")
+    else:
+        os.execl(python, python, * sys.argv)
+elif (secim==9):
+    os.system("apt-get install crunch -y")
+    os.system("clear")
+    os.system("figlet Wordlist Olusturma")
+    print ("""
+Hosgeldiniz.. Wordlist olusturmak icin seciminizi girin..
+1)Wordlist Olusturma
+2)Ana Menuye donme
+""")
+    wordlistsecim=raw_input("Seciminizi girin:")
+    if (wordlistsecim==1):
+        print("Olusturulacak Wordlistte ki Degerleri Girin")
+        minkarakter=raw_input("Minimum Karakter Sayisi: ")
+        maxkarakter=raw_input("Maksimum Karakter Sayisi: ")
+        karakter=raw_input("Kullanacaginiz Karakterleri Girin: ")
+        print("Ornek Kullanim: /root/Desktop/parola.txt")
+        kayityeri=raw_input("Wordlistin kaydedilmesi istediginiz dizini girin:")
+        os.system("crunch "+minkarakter+" "+ maxkarakter + " " + karakter + " -o" + kayityeri)
+        print("islem tamamlandi.. Parola dosyasi konumu: "+kayityeri)
+    else:
+        os.execl(python, python, * sys.argv)
