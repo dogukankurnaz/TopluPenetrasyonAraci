@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -175,9 +175,10 @@ elif (secim==6):
 Hosgeldiniz.. Veritabanında Exploit arama işlemi icin seciminizi girin..
 1)Exploit aramak icin
 2)Ana menuye donmek icin""")
-    exploitsecim=str(raw_input("Anahtar Kelime Girin:"))
+    exploitsecim=int(input("Seciminizi Girin:"))
+    anahtar=str(raw_input("Anahtar Kelime Girin:"))
     if (exploitsecim==1):
-        os.system("searchsploit"+ exploitsecim)
+        os.system("searchsploit "+ anahtar)
     else:
         os.execl(python, python, * sys.argv)
 elif (secim==7):
@@ -233,15 +234,19 @@ Hosgeldiniz.. Wordlist olusturmak icin seciminizi girin..
 1)Wordlist Olusturma
 2)Ana Menuye donme
 """)
-    wordlistsecim=raw_input("Seciminizi girin:")
+    wordlistsecim=int(raw_input("Seciminizi girin:"))
     if (wordlistsecim==1):
         print("Olusturulacak Wordlistte ki Degerleri Girin")
-        minkarakter=raw_input("Minimum Karakter Sayisi: ")
-        maxkarakter=raw_input("Maksimum Karakter Sayisi: ")
-        karakter=raw_input("Kullanacaginiz Karakterleri Girin: ")
-        print("Ornek Kullanim: /root/Desktop/parola.txt")
-        kayityeri=raw_input("Wordlistin kaydedilmesi istediginiz dizini girin:")
-        os.system("crunch "+minkarakter+" "+ maxkarakter + " " + karakter + " -o" + kayityeri)
-        print("islem tamamlandi.. Parola dosyasi konumu: "+kayityeri)
+        minkarakter=int(raw_input("Minimum Karakter Sayisi: "))
+        maxkarakter=int(raw_input("Maksimum Karakter Sayisi: "))
+        try: input=raw_input
+        except NameError: pass
+        karakter=input("Kullanacaginiz Karakterleri Girin: ")
+        print("Ornek Kullanim: /home/kali/Desktop/parola.txt")
+        kayityeri=(raw_input("Wordlistin kaydedilmesi istediginiz dizini girin:"))
+        os.system("crunch "+ str(minkarakter) +" "+ str(maxkarakter) + " " + str(karakter) + " -o " + str(kayityeri))
+        print("islem tamamlandi.. Parola dosyasi konumu: "+str(kayityeri))
     else:
         os.execl(python, python, * sys.argv)
+else:
+    print ("Hatali Bir Secim Yaptiniz Program Kapatiliyor....!!")
