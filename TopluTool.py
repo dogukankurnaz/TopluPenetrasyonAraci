@@ -152,7 +152,7 @@ not: Sistemde bir zaafiyet bulursa Exploitleriyle birlikte size bir cikti verir.
     niktosec=int(input("Seciminizi yapin: "))
     hedefip=raw_input("Hedef IP Girin: ")
     if (niktosec==1):
-        os.system("nikto -h"+ hedefip)
+        os.system("nikto -h " + hedefip)
     else:
         os.execl(python, python, * sys.argv)
 elif (secim==5):
